@@ -14,6 +14,8 @@ Esta é uma API RESTful desenvolvida em **Node.js** com **Express**, utilizando 
 - Nodemon
 - Dotenv
 - Cors
+- Docker & Docker Compose
+- CI/CD (GitHub Actions)
 
 ---
 
@@ -24,9 +26,12 @@ Esta é uma API RESTful desenvolvida em **Node.js** com **Express**, utilizando 
 ├── controllers/        # Lógica dos controladores
 ├── models/             # Modelos Sequelize
 ├── routes/             # Rotas da aplicação
-├── docs/                # Documentação da API (SwaggerConfig.js)
+├── docs/               # Documentação da API (SwaggerConfig.js)
 ├── .env                # Variáveis de ambiente
-├── server.js              # Arquivo principal da aplicação
+├── server.js           # Arquivo principal da aplicação
+├── Dockerfile          # Dockerfile da aplicação
+├── docker-compose.yml  # Orquestração dos containers
+├── .github/workflows/  # Pipelines CI/CD (GitHub Actions)
 └── README.md           # Este arquivo
 ```
 
@@ -65,6 +70,27 @@ Esta é uma API RESTful desenvolvida em **Node.js** com **Express**, utilizando 
 
 ---
 
+## 🐳 Executando com Docker
+
+1. Certifique-se de ter o **Docker** e o **Docker Compose** instalados.
+2. Para subir a aplicação e o banco de dados, execute:
+   ```bash
+   docker-compose up --build
+   ```
+3. O serviço estará disponível em [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 🚀 Pipeline CI/CD
+
+Este projeto utiliza **GitHub Actions** para automação de testes e deploy. O workflow está localizado em `.github/workflows/`.  
+A pipeline executa:
+- Instalação das dependências
+- Execução dos testes automatizados
+- Build da aplicação Docker
+
+---
+
 ## 🧪 Testando a API
 
 Após rodar o projeto, acesse a documentação interativa:
@@ -90,4 +116,4 @@ Este projeto está sob a licença MIT. Sinta-se livre para utilizar e modificar 
 
 ---
 
-Desenvolvido com 💙 por Lázaro Vasconcelos 
+Desenvolvido com 💙 por Lázaro Vasconcelos
