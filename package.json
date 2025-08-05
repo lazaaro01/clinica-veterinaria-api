@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "src/server.js"
   },
   "keywords": [],
   "author": "Lázaro Vasconcelos",
