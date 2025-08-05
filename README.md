@@ -24,7 +24,7 @@ Esta é uma API RESTful desenvolvida em **Node.js** com **Express**, utilizando 
 ├── controllers/        # Lógica dos controladores
 ├── models/             # Modelos Sequelize
 ├── routes/             # Rotas da aplicação
-├── swagger/            # Documentação da API (swagger.json)
+├── docs/                # Documentação da API (SwaggerConfig.js)
 ├── .env                # Variáveis de ambiente
 ├── server.js              # Arquivo principal da aplicação
 └── README.md           # Este arquivo
