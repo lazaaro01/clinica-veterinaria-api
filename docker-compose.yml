@@ -5,9 +5,9 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_DB: nome_do_banco
-      POSTGRES_USER: usuario
-      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: clinica_veterinaria
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123455
     ports:
       - "5432:5432"
     volumes:
@@ -21,7 +21,7 @@ services:
       DB_NAME: clinica_veterinaria
       DB_USER: postgres
       DB_PASSWORD: 123455
-      DB_HOST: localhost
+      DB_HOST: db
       DB_PORT: 5432
     depends_on:
       - db
