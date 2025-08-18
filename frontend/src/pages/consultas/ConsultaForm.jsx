@@ -32,14 +32,12 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
   })
 
   useEffect(() => {
-    if (selectedCliente) {
+    if(selectedCliente) {
       const filteredAnimais = animais.filter(
-        (animal) => animal.cliente_id === parseInt(selectedCliente)
+        (animal) => String(animal.clienteId) === String(selectedCliente)
       )
       setClienteAnimais(filteredAnimais)
-      
-      // Reset animal selection when client changes
-      setFormData((prev) => ({ ...prev, animal_id: '' }))
+      setFormData((prev) => ({...prev, animal_id: ''}))
     } else {
       setClienteAnimais([])
     }
@@ -59,7 +57,6 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
     onSubmit(formData)
   }
 
-  // Format date-time for the datetime-local input
   const getCurrentDateTime = () => {
     const now = new Date()
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
@@ -130,7 +127,7 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
               <option value="">Selecione um animal</option>
               {clienteAnimais.map((animal) => (
                 <option key={animal.id} value={animal.id}>
-                  {animal.nome} ({animal.especie})
+                  {animal.nome} ({animal.especie}) - {animal.Cliente ? animal.Cliente.nome : 'Proprietário não encontrado'}
                 </option>
               ))}
             </select>

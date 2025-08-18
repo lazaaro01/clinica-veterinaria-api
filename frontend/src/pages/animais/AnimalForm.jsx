@@ -21,7 +21,7 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
     onSubmit({
       ...formData,
       idade: Number(formData.idade),
-      clienteId: Number(formData.clienteId),
+      cliente_id: Number(formData.clienteId), // <-- altere aqui!
     })
   }
 
