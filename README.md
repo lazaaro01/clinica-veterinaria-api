@@ -110,5 +110,10 @@ Após rodar o projeto, acesse a documentação interativa:
 
 ---
 
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Sinta-se livre para utilizar e modificar conforme necessário.
+
+---
 
 Desenvolvido com 💙 por Lázaro Vasconcelos

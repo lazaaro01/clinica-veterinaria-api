@@ -21,10 +21,10 @@ services:
       DB_NAME: clinica_veterinaria
       DB_USER: postgres
       DB_PASSWORD: 123455
-      DB_HOST: db
+      DB_HOST: localhost
       DB_PORT: 5432
     depends_on:
-      - db
+      - localhost
     volumes:
       - .:/app
       - /app/node_modules

@@ -14,6 +14,10 @@ const Cliente = sequelize.define('Cliente', {
         type: DataTypes.STRING,
         allowNull: false,
         validate: { isEmail: true }
+    },
+    endereco: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 });
 

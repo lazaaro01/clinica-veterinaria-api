@@ -12,6 +12,7 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
     motivo: '',
     animal_id: '',
     veterinario_id: '',
+    clienteId: '',
   })
   const [selectedCliente, setSelectedCliente] = useState('')
   const [clienteAnimais, setClienteAnimais] = useState([])
