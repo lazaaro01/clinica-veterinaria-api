@@ -15,10 +15,6 @@ const Cliente = sequelize.define('Cliente', {
         allowNull: false,
         validate: { isEmail: true }
     },
-    endereco: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    }
 });
 
 module.exports = Cliente;
