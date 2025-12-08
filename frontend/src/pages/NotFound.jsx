@@ -7,7 +7,7 @@ const NotFound = () => {
       <div className="text-center scale-in">
         {/* Large 404 */}
         <div className="relative mb-8">
-          <h1 className="text-[180px] font-black text-slate-100 leading-none select-none">
+          <h1 className="text-[180px] font-black text-slate-100 dark:text-slate-800 leading-none select-none">
             404
           </h1>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -19,8 +19,8 @@ const NotFound = () => {
 
         {/* Content */}
         <div className="space-y-4 mb-8">
-          <h2 className="text-2xl font-bold text-slate-800">Página não encontrada</h2>
-          <p className="text-slate-500 max-w-md mx-auto">
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Página não encontrada</h2>
+          <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto">
             Oops! Parece que a página que você está procurando não existe ou foi movida para outro endereço.
           </p>
         </div>
@@ -29,7 +29,7 @@ const NotFound = () => {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all duration-300 hover:-translate-x-1"
+            className="flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 hover:-translate-x-1"
           >
             <ArrowLeft className="h-4 w-4" />
             Voltar

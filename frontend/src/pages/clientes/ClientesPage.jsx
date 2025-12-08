@@ -51,8 +51,8 @@ const ClientesPage = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Clientes</h1>
-          <p className="text-slate-500 mt-1">Gerencie os clientes da sua clínica</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Clientes</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Gerencie os clientes da sua clínica</p>
         </div>
         <button
           onClick={() => setIsFormOpen(true)}
@@ -65,7 +65,7 @@ const ClientesPage = () => {
 
       {/* Search Bar */}
       <div className="relative max-w-md">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
         <input
           type="text"
           placeholder="Buscar clientes por nome, email ou telefone..."
@@ -106,27 +106,27 @@ const ClientesPage = () => {
                   <tr key={cliente.id}>
                     <td>
                       <div className="flex items-center gap-3">
-                        <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${colors[index % colors.length]} text-white font-semibold text-sm shadow-lg`}>
+                        <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${colors[index % colors.length]} text-white font-semibold text-sm shadow-lg dark:shadow-none`}>
                           {initials}
                         </div>
-                        <span className="font-medium text-slate-700">{cliente.nome}</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-200">{cliente.nome}</span>
                       </div>
                     </td>
                     <td>
-                      <div className="flex items-center gap-2 text-slate-600">
-                        <Mail className="h-4 w-4 text-slate-400" />
+                      <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                        <Mail className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                         {cliente.email}
                       </div>
                     </td>
                     <td>
-                      <div className="flex items-center gap-2 text-slate-600">
-                        <Phone className="h-4 w-4 text-slate-400" />
+                      <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                        <Phone className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                         {cliente.telefone}
                       </div>
                     </td>
                     <td>
-                      <div className="flex items-center gap-2 text-slate-600">
-                        <MapPin className="h-4 w-4 text-slate-400" />
+                      <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                        <MapPin className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                         <span className="truncate max-w-[200px]">{cliente.endereco}</span>
                       </div>
                     </td>

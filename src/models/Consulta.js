@@ -1,4 +1,4 @@
-const { DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Animal = require('./Animal');
 const Veterinario = require('./Veterinario');
@@ -18,8 +18,9 @@ const Consulta = sequelize.define('Consulta', {
     },
 });
 
-Consulta.belongsTo(Animal, { foreignKey: 'animalId', onDelete: 'CASCADE' });
-Consulta.belongsTo(Veterinario, { foreignKey: 'veterinarioId', onDelete: 'CASCADE' });
+// Associações com aliases em minúsculo para compatibilidade com o frontend
+Consulta.belongsTo(Animal, { as: 'animal', foreignKey: 'animalId', onDelete: 'CASCADE' });
+Consulta.belongsTo(Veterinario, { as: 'veterinario', foreignKey: 'veterinarioId', onDelete: 'CASCADE' });
 Animal.hasMany(Consulta, { foreignKey: 'animalId' });
 Veterinario.hasMany(Consulta, { foreignKey: 'veterinarioId' });
 

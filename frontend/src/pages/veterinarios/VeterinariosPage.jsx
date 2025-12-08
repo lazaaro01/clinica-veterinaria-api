@@ -64,8 +64,8 @@ const VeterinariosPage = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Veterinários</h1>
-          <p className="text-slate-500 mt-1">Gerencie a equipe de profissionais</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Veterinários</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Gerencie a equipe de profissionais</p>
         </div>
         <button
           onClick={() => setIsFormOpen(true)}
@@ -78,7 +78,7 @@ const VeterinariosPage = () => {
 
       {/* Search Bar */}
       <div className="relative max-w-md">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
         <input
           type="text"
           placeholder="Buscar veterinários por nome, CRMV ou especialidade..."
@@ -101,11 +101,11 @@ const VeterinariosPage = () => {
             return (
               <div key={veterinario.id} className="card-premium p-6 group">
                 <div className="flex items-start gap-4">
-                  <div className={`flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${getSpecialtyColor(veterinario.especialidade)} text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform`}>
+                  <div className={`flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${getSpecialtyColor(veterinario.especialidade)} text-white font-bold text-lg shadow-lg dark:shadow-none group-hover:scale-110 transition-transform`}>
                     {initials}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-slate-800 truncate">
+                    <h3 className="font-semibold text-slate-800 dark:text-white truncate">
                       Dr(a). {veterinario.nome}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
@@ -116,16 +116,16 @@ const VeterinariosPage = () => {
                   </div>
                 </div>
 
-                <div className="mt-5 pt-5 border-t border-slate-100 space-y-3">
-                  <div className="flex items-center gap-3 text-sm text-slate-600">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50">
-                      <Award className="h-4 w-4 text-blue-500" />
+                <div className="mt-5 pt-5 border-t border-slate-100 dark:border-slate-700 space-y-3">
+                  <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/50">
+                      <Award className="h-4 w-4 text-blue-500 dark:text-blue-400" />
                     </div>
                     <span>CRMV: <span className="font-medium">{veterinario.crmv}</span></span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm text-slate-600">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50">
-                      <Phone className="h-4 w-4 text-emerald-500" />
+                  <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/50">
+                      <Phone className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                     </div>
                     <span>{veterinario.telefone}</span>
                   </div>

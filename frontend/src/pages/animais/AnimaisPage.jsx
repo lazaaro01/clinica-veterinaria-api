@@ -80,8 +80,8 @@ const AnimaisPage = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Animais</h1>
-          <p className="text-slate-500 mt-1">Gerencie os pacientes da sua clínica</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Animais</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Gerencie os pacientes da sua clínica</p>
         </div>
         <button
           onClick={() => setIsFormOpen(true)}
@@ -94,7 +94,7 @@ const AnimaisPage = () => {
 
       {/* Search Bar */}
       <div className="relative max-w-md">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
         <input
           type="text"
           placeholder="Buscar animais por nome, espécie ou proprietário..."
@@ -126,10 +126,10 @@ const AnimaisPage = () => {
                 <tr key={animal.id}>
                   <td>
                     <div className="flex items-center gap-3">
-                      <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${getAnimalColor(animal.especie)} text-white shadow-lg`}>
+                      <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${getAnimalColor(animal.especie)} text-white shadow-lg dark:shadow-none`}>
                         {getAnimalIcon(animal.especie)}
                       </div>
-                      <span className="font-medium text-slate-700">{animal.nome}</span>
+                      <span className="font-medium text-slate-700 dark:text-slate-200">{animal.nome}</span>
                     </div>
                   </td>
                   <td>
@@ -138,16 +138,16 @@ const AnimaisPage = () => {
                     </span>
                   </td>
                   <td>
-                    <span className="text-slate-600">{animal.raca}</span>
+                    <span className="text-slate-600 dark:text-slate-300">{animal.raca}</span>
                   </td>
                   <td>
-                    <span className="text-slate-600">
+                    <span className="text-slate-600 dark:text-slate-300">
                       {animal.idade} {animal.idade === 1 ? 'ano' : 'anos'}
                     </span>
                   </td>
                   <td>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <User className="h-4 w-4 text-slate-400" />
+                    <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                      <User className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                       {animal.cliente?.nome}
                     </div>
                   </td>

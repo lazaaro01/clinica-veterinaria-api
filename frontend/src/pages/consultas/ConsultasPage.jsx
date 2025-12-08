@@ -97,8 +97,8 @@ const ConsultasPage = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Consultas</h1>
-          <p className="text-slate-500 mt-1">Gerencie os agendamentos da clínica</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Consultas</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Gerencie os agendamentos da clínica</p>
         </div>
         <button
           onClick={() => setIsFormOpen(true)}
@@ -112,7 +112,7 @@ const ConsultasPage = () => {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
           <input
             type="text"
             placeholder="Buscar por animal, proprietário ou veterinário..."
@@ -124,7 +124,7 @@ const ConsultasPage = () => {
 
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
             <input
               type="date"
               className="input-premium pl-11 w-48"
@@ -137,7 +137,7 @@ const ConsultasPage = () => {
           {selectedDate && (
             <button
               onClick={() => setSelectedDate(null)}
-              className="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-500 dark:text-slate-400 transition-colors"
             >
               <X className="h-4 w-4" />
             </button>
@@ -176,34 +176,34 @@ const ConsultasPage = () => {
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Animal */}
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-100">
-                      <PawPrint className="h-5 w-5 text-amber-600" />
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/50">
+                      <PawPrint className="h-5 w-5 text-amber-600 dark:text-amber-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Animal</p>
-                      <p className="font-semibold text-slate-700">{consulta.animal?.nome}</p>
+                      <p className="text-xs text-slate-400 dark:text-slate-500">Animal</p>
+                      <p className="font-semibold text-slate-700 dark:text-slate-200">{consulta.animal?.nome}</p>
                     </div>
                   </div>
 
                   {/* Owner */}
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-100">
-                      <User className="h-5 w-5 text-blue-600" />
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50">
+                      <User className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Proprietário</p>
-                      <p className="font-semibold text-slate-700">{consulta.animal?.cliente?.nome}</p>
+                      <p className="text-xs text-slate-400 dark:text-slate-500">Proprietário</p>
+                      <p className="font-semibold text-slate-700 dark:text-slate-200">{consulta.animal?.cliente?.nome}</p>
                     </div>
                   </div>
 
                   {/* Vet */}
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-100">
-                      <Stethoscope className="h-5 w-5 text-purple-600" />
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/50">
+                      <Stethoscope className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Veterinário</p>
-                      <p className="font-semibold text-slate-700">Dr(a). {consulta.veterinario?.nome}</p>
+                      <p className="text-xs text-slate-400 dark:text-slate-500">Veterinário</p>
+                      <p className="font-semibold text-slate-700 dark:text-slate-200">Dr(a). {consulta.veterinario?.nome}</p>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ const ConsultasPage = () => {
                     <button
                       onClick={() => handleCancel(consulta.id)}
                       disabled={cancelMutation.isPending}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors disabled:opacity-50"
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors disabled:opacity-50"
                     >
                       <AlertCircle className="h-4 w-4" />
                       Cancelar
