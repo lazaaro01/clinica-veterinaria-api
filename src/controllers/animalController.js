@@ -6,7 +6,8 @@ module.exports = {
     const animais = await Animal.findAll({
       include: {
         model: Cliente,
-        attributes: ['id', 'nome', 'telefone']
+        as: 'cliente',
+        attributes: ['id', 'nome', 'telefone', 'endereco']
       }
     });
     res.json(animais);

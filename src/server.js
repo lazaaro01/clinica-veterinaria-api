@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./docs/swaggerConfig');
+const swaggerSpec = require('./docs/SwaggerConfig');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const clienteRoutes = require('./routes/clienteRoutes');
@@ -25,9 +25,8 @@ sequelize.authenticate()
   .then(() => console.log('✅ Conectado ao banco PostgreSQL com sucesso!'))
   .catch((err) => console.error('❌ Erro ao conectar no banco:', err));
 
-// Sincronizar modelos (opcional: usar { force: true } para recriar tabelas)
-sequelize.sync().then(() => {
-  console.log('📦 Modelos sincronizados com o banco de dados');
+sequelize.sync({ alter: true }).then(() => {
+  console.log('📦 Modelos sincronizados com o banco de dados (alter)');
 });
 
 const PORT = process.env.PORT || 3000;

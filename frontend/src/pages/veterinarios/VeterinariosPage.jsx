@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus, Search } from 'lucide-react'
+import { Plus, Search, Stethoscope, Phone, Award, Briefcase } from 'lucide-react'
 import { veterinarioService } from '@/services/veterinarioService'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
@@ -46,71 +46,114 @@ const VeterinariosPage = () => {
     veterinario.crmv.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
+  const specialtyColors = {
+    'Clínico Geral': 'from-blue-500 to-cyan-500',
+    'Cirurgião': 'from-red-500 to-rose-500',
+    'Dermatologista': 'from-amber-500 to-orange-500',
+    'Cardiologista': 'from-pink-500 to-rose-500',
+    'Ortopedista': 'from-emerald-500 to-teal-500',
+    'default': 'from-purple-500 to-indigo-500'
+  }
+
+  const getSpecialtyColor = (specialty) => {
+    return specialtyColors[specialty] || specialtyColors['default']
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Page Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Veterinários</h1>
-        <Button onClick={() => setIsFormOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Novo Veterinário
-        </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Veterinários</h1>
+          <p className="text-slate-500 mt-1">Gerencie a equipe de profissionais</p>
+        </div>
+        <button
+          onClick={() => setIsFormOpen(true)}
+          className="btn-primary flex items-center gap-2"
+        >
+          <Plus className="h-4 w-4" />
+          Novo Veterinário
+        </button>
       </div>
 
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+      {/* Search Bar */}
+      <div className="relative max-w-md">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
         <input
           type="text"
-          placeholder="Buscar veterinários..."
-          className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 focus:border-vet-primary focus:outline-none focus:ring-1 focus:ring-vet-primary"
+          placeholder="Buscar veterinários por nome, CRMV ou especialidade..."
+          className="input-premium pl-11"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
+      {/* Content */}
       {isLoading ? (
-        <div className="flex justify-center">
-          <p>Carregando...</p>
+        <div className="flex items-center justify-center py-20">
+          <div className="spinner" />
         </div>
       ) : filteredVeterinarios.length > 0 ? (
-        <div className="rounded-md border">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b bg-gray-50">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Nome</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">CRMV</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Especialidade</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Telefone</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {filteredVeterinarios.map((veterinario) => (
-                <tr key={veterinario.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm">{veterinario.nome}</td>
-                  <td className="px-4 py-3 text-sm">{veterinario.crmv}</td>
-                  <td className="px-4 py-3 text-sm">{veterinario.especialidade}</td>
-                  <td className="px-4 py-3 text-sm">{veterinario.telefone}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredVeterinarios.map((veterinario, index) => {
+            const initials = veterinario.nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+
+            return (
+              <div key={veterinario.id} className="card-premium p-6 group">
+                <div className="flex items-start gap-4">
+                  <div className={`flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${getSpecialtyColor(veterinario.especialidade)} text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform`}>
+                    {initials}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-slate-800 truncate">
+                      Dr(a). {veterinario.nome}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="badge badge-success">
+                        {veterinario.especialidade}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 pt-5 border-t border-slate-100 space-y-3">
+                  <div className="flex items-center gap-3 text-sm text-slate-600">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50">
+                      <Award className="h-4 w-4 text-blue-500" />
+                    </div>
+                    <span>CRMV: <span className="font-medium">{veterinario.crmv}</span></span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-slate-600">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50">
+                      <Phone className="h-4 w-4 text-emerald-500" />
+                    </div>
+                    <span>{veterinario.telefone}</span>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       ) : (
-        <div className="flex justify-center rounded-md border border-dashed p-8">
-          <div className="text-center">
-            <p className="text-gray-500">
-              {searchTerm
-                ? 'Nenhum veterinário encontrado com os termos da busca.'
-                : 'Nenhum veterinário cadastrado ainda.'}
-            </p>
-            {!searchTerm && (
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => setIsFormOpen(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" /> Adicionar Veterinário
-              </Button>
-            )}
-          </div>
+        <div className="empty-state">
+          <Stethoscope className="empty-state-icon" />
+          <h3 className="empty-state-title">
+            {searchTerm ? 'Nenhum veterinário encontrado' : 'Nenhum veterinário cadastrado'}
+          </h3>
+          <p className="empty-state-description">
+            {searchTerm
+              ? 'Tente ajustar os termos da sua busca.'
+              : 'Comece adicionando o primeiro profissional à equipe.'}
+          </p>
+          {!searchTerm && (
+            <button
+              onClick={() => setIsFormOpen(true)}
+              className="btn-primary flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Adicionar Veterinário
+            </button>
+          )}
         </div>
       )}
 

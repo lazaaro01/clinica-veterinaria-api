@@ -1,11 +1,33 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus, Search } from 'lucide-react'
+import { Plus, Search, PawPrint, Dog, Cat, User } from 'lucide-react'
 import { animalService } from '@/services/animalService'
 import { clienteService } from '@/services/clienteService'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import AnimalForm from './AnimalForm'
+
+const getAnimalIcon = (especie) => {
+  const esp = especie?.toLowerCase() || ''
+  if (esp.includes('cachorro') || esp.includes('cão') || esp.includes('dog')) {
+    return <Dog className="h-5 w-5" />
+  }
+  if (esp.includes('gato') || esp.includes('cat')) {
+    return <Cat className="h-5 w-5" />
+  }
+  return <PawPrint className="h-5 w-5" />
+}
+
+const getAnimalColor = (especie) => {
+  const esp = especie?.toLowerCase() || ''
+  if (esp.includes('cachorro') || esp.includes('cão') || esp.includes('dog')) {
+    return 'from-amber-500 to-orange-500'
+  }
+  if (esp.includes('gato') || esp.includes('cat')) {
+    return 'from-purple-500 to-pink-500'
+  }
+  return 'from-emerald-500 to-teal-500'
+}
 
 const AnimaisPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -54,72 +76,106 @@ const AnimaisPage = () => {
   )
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Page Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Animais</h1>
-        <Button onClick={() => setIsFormOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Novo Animal
-        </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Animais</h1>
+          <p className="text-slate-500 mt-1">Gerencie os pacientes da sua clínica</p>
+        </div>
+        <button
+          onClick={() => setIsFormOpen(true)}
+          className="btn-primary flex items-center gap-2"
+        >
+          <Plus className="h-4 w-4" />
+          Novo Animal
+        </button>
       </div>
 
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+      {/* Search Bar */}
+      <div className="relative max-w-md">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
         <input
           type="text"
-          placeholder="Buscar animais..."
-          className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 focus:border-vet-primary focus:outline-none focus:ring-1 focus:ring-vet-primary"
+          placeholder="Buscar animais por nome, espécie ou proprietário..."
+          className="input-premium pl-11"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
+      {/* Content */}
       {isLoading ? (
-        <div className="flex justify-center">
-          <p>Carregando...</p>
+        <div className="flex items-center justify-center py-20">
+          <div className="spinner" />
         </div>
       ) : filteredAnimais.length > 0 ? (
-        <div className="rounded-md border">
-          <table className="w-full">
+        <div className="card-premium overflow-hidden">
+          <table className="table-premium">
             <thead>
-              <tr className="border-b bg-gray-50">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Nome</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Espécie</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Raça</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Idade</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Proprietário</th>
+              <tr>
+                <th>Animal</th>
+                <th>Espécie</th>
+                <th>Raça</th>
+                <th>Idade</th>
+                <th>Proprietário</th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody>
               {filteredAnimais.map((animal) => (
-                <tr key={animal.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm">{animal.nome}</td>
-                  <td className="px-4 py-3 text-sm">{animal.especie}</td>
-                  <td className="px-4 py-3 text-sm">{animal.raca}</td>
-                  <td className="px-4 py-3 text-sm">{animal.idade} anos</td>
-                  <td className="px-4 py-3 text-sm">{animal.cliente?.nome}</td>
+                <tr key={animal.id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${getAnimalColor(animal.especie)} text-white shadow-lg`}>
+                        {getAnimalIcon(animal.especie)}
+                      </div>
+                      <span className="font-medium text-slate-700">{animal.nome}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span className="badge badge-primary">
+                      {animal.especie}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="text-slate-600">{animal.raca}</span>
+                  </td>
+                  <td>
+                    <span className="text-slate-600">
+                      {animal.idade} {animal.idade === 1 ? 'ano' : 'anos'}
+                    </span>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <User className="h-4 w-4 text-slate-400" />
+                      {animal.cliente?.nome}
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       ) : (
-        <div className="flex justify-center rounded-md border border-dashed p-8">
-          <div className="text-center">
-            <p className="text-gray-500">
-              {searchTerm
-                ? 'Nenhum animal encontrado com os termos da busca.'
-                : 'Nenhum animal cadastrado ainda.'}
-            </p>
-            {!searchTerm && (
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => setIsFormOpen(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" /> Adicionar Animal
-              </Button>
-            )}
-          </div>
+        <div className="empty-state">
+          <PawPrint className="empty-state-icon" />
+          <h3 className="empty-state-title">
+            {searchTerm ? 'Nenhum animal encontrado' : 'Nenhum animal cadastrado'}
+          </h3>
+          <p className="empty-state-description">
+            {searchTerm
+              ? 'Tente ajustar os termos da sua busca.'
+              : 'Comece adicionando o primeiro paciente à clínica.'}
+          </p>
+          {!searchTerm && (
+            <button
+              onClick={() => setIsFormOpen(true)}
+              className="btn-primary flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Adicionar Animal
+            </button>
+          )}
         </div>
       )}
 

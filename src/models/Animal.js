@@ -22,6 +22,7 @@ const Animal = sequelize.define('Animal', {
 });
 
 Animal.belongsTo(Cliente, {foreignKey: 'clienteId', onDelete: 'CASCADE'});
-Cliente.hasMany(Animal, {foreignKey: 'clienteId'});
+Animal.belongsTo(Cliente, { as: 'cliente', foreignKey: 'clienteId', onDelete: 'CASCADE' });
+Cliente.hasMany(Animal, { as: 'animais', foreignKey: 'clienteId' });
 
 module.exports = Animal;

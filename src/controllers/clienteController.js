@@ -8,8 +8,8 @@ module.exports = {
 
   async criarCliente(req, res) {
     try {
-      const { nome, telefone, email } = req.body;
-      const novoCliente = await Cliente.create({ nome, telefone, email });
+      const { nome, telefone, email, endereco } = req.body;
+      const novoCliente = await Cliente.create({ nome, telefone, email, endereco });
       res.status(201).json(novoCliente);
     } catch (error) {
       res.status(400).json({ erro: 'Erro ao cadastrar cliente', detalhes: error.message });

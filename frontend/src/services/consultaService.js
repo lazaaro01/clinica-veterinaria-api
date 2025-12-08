@@ -7,7 +7,14 @@ export const consultaService = {
   },
   
   agendarConsulta: async (consulta) => {
+    // Log para verificar os dados antes de enviar para a API
+    console.log('Agendando consulta com os seguintes dados:', consulta);
+
     const response = await api.post('/consultas', consulta)
+    
+    // Log para verificar a resposta da API
+    console.log('Resposta da API após agendar consulta:', response.data);
+    
     return response.data
   },
   

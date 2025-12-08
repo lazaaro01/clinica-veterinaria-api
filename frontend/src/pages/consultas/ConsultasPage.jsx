@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus, Search, Calendar, X } from 'lucide-react'
+import { Plus, Search, Calendar, X, Clock, User, Stethoscope, PawPrint, AlertCircle } from 'lucide-react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { consultaService } from '@/services/consultaService'
@@ -80,24 +80,43 @@ const ConsultasPage = () => {
     }
 
     return matchesSearch
-  })
+  }).sort((a, b) => new Date(a.data_hora) - new Date(b.data_hora))
+
+  const isToday = (date) => {
+    const today = new Date().toISOString().split('T')[0]
+    const consultaDate = new Date(date).toISOString().split('T')[0]
+    return today === consultaDate
+  }
+
+  const isPast = (date) => {
+    return new Date(date) < new Date()
+  }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Page Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Consultas</h1>
-        <Button onClick={() => setIsFormOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Nova Consulta
-        </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Consultas</h1>
+          <p className="text-slate-500 mt-1">Gerencie os agendamentos da clínica</p>
+        </div>
+        <button
+          onClick={() => setIsFormOpen(true)}
+          className="btn-primary flex items-center gap-2"
+        >
+          <Plus className="h-4 w-4" />
+          Nova Consulta
+        </button>
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Buscar consultas..."
-            className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 focus:border-vet-primary focus:outline-none focus:ring-1 focus:ring-vet-primary"
+            placeholder="Buscar por animal, proprietário ou veterinário..."
+            className="input-premium pl-11"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -105,89 +124,133 @@ const ConsultasPage = () => {
 
         <div className="flex items-center gap-2">
           <div className="relative">
+            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
             <input
               type="date"
-              className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 focus:border-vet-primary focus:outline-none focus:ring-1 focus:ring-vet-primary"
+              className="input-premium pl-11 w-48"
               onChange={(e) => {
                 const date = e.target.value ? new Date(e.target.value) : null
                 setSelectedDate(date)
               }}
             />
-            <Calendar className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
           </div>
           {selectedDate && (
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
               onClick={() => setSelectedDate(null)}
-              className="h-10 w-10"
+              className="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors"
             >
               <X className="h-4 w-4" />
-            </Button>
+            </button>
           )}
         </div>
       </div>
 
+      {/* Content */}
       {isLoading ? (
-        <div className="flex justify-center">
-          <p>Carregando...</p>
+        <div className="flex items-center justify-center py-20">
+          <div className="spinner" />
         </div>
       ) : filteredConsultas.length > 0 ? (
-        <div className="rounded-md border">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b bg-gray-50">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Data e Hora</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Animal</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Proprietário</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Veterinário</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Ações</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {filteredConsultas.map((consulta) => (
-                <tr key={consulta.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm">
-                    {format(new Date(consulta.data_hora), "dd 'de' MMMM 'de' yyyy 'às' HH:mm", {
-                      locale: ptBR,
-                    })}
-                  </td>
-                  <td className="px-4 py-3 text-sm">{consulta.animal?.nome}</td>
-                  <td className="px-4 py-3 text-sm">{consulta.animal?.cliente?.nome}</td>
-                  <td className="px-4 py-3 text-sm">{consulta.veterinario?.nome}</td>
-                  <td className="px-4 py-3 text-sm">
-                    <Button
-                      variant="destructive"
-                      size="sm"
+        <div className="grid grid-cols-1 gap-4">
+          {filteredConsultas.map((consulta) => {
+            const consultaDate = new Date(consulta.data_hora)
+            const today = isToday(consulta.data_hora)
+            const past = isPast(consulta.data_hora)
+
+            return (
+              <div
+                key={consulta.id}
+                className={`card-premium p-5 flex items-center gap-6 ${past && !today ? 'opacity-60' : ''}`}
+              >
+                {/* Time Block */}
+                <div className={`flex flex-col items-center justify-center w-20 h-20 rounded-xl text-white ${today ? 'gradient-primary' : past ? 'bg-slate-400' : 'gradient-secondary'}`}>
+                  <span className="text-2xl font-bold">
+                    {format(consultaDate, "HH:mm")}
+                  </span>
+                  <span className="text-xs opacity-80">
+                    {format(consultaDate, "dd/MM")}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Animal */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-100">
+                      <PawPrint className="h-5 w-5 text-amber-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400">Animal</p>
+                      <p className="font-semibold text-slate-700">{consulta.animal?.nome}</p>
+                    </div>
+                  </div>
+
+                  {/* Owner */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-100">
+                      <User className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400">Proprietário</p>
+                      <p className="font-semibold text-slate-700">{consulta.animal?.cliente?.nome}</p>
+                    </div>
+                  </div>
+
+                  {/* Vet */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-100">
+                      <Stethoscope className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400">Veterinário</p>
+                      <p className="font-semibold text-slate-700">Dr(a). {consulta.veterinario?.nome}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status & Actions */}
+                <div className="flex items-center gap-3">
+                  {today && (
+                    <span className="badge badge-warning flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      Hoje
+                    </span>
+                  )}
+                  {!past && (
+                    <button
                       onClick={() => handleCancel(consulta.id)}
                       disabled={cancelMutation.isPending}
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors disabled:opacity-50"
                     >
+                      <AlertCircle className="h-4 w-4" />
                       Cancelar
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    </button>
+                  )}
+                </div>
+              </div>
+            )
+          })}
         </div>
       ) : (
-        <div className="flex justify-center rounded-md border border-dashed p-8">
-          <div className="text-center">
-            <p className="text-gray-500">
-              {searchTerm || selectedDate
-                ? 'Nenhuma consulta encontrada com os filtros aplicados.'
-                : 'Nenhuma consulta agendada ainda.'}
-            </p>
-            {!searchTerm && !selectedDate && (
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => setIsFormOpen(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" /> Agendar Consulta
-              </Button>
-            )}
-          </div>
+        <div className="empty-state">
+          <Calendar className="empty-state-icon" />
+          <h3 className="empty-state-title">
+            {searchTerm || selectedDate ? 'Nenhuma consulta encontrada' : 'Nenhuma consulta agendada'}
+          </h3>
+          <p className="empty-state-description">
+            {searchTerm || selectedDate
+              ? 'Tente ajustar os filtros da sua busca.'
+              : 'Comece agendando a primeira consulta.'}
+          </p>
+          {!searchTerm && !selectedDate && (
+            <button
+              onClick={() => setIsFormOpen(true)}
+              className="btn-primary flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Agendar Consulta
+            </button>
+          )}
         </div>
       )}
 
