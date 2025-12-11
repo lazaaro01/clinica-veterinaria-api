@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Home, Users, PawPrint, Stethoscope, Calendar, Heart, Settings, HelpCircle } from 'lucide-react'
+import { Home, Users, PawPrint, Stethoscope, Calendar, Settings, HelpCircle } from 'lucide-react'
 
 const Sidebar = () => {
   const navItems = [
@@ -14,8 +14,8 @@ const Sidebar = () => {
     <aside className="w-72 min-h-screen gradient-sidebar flex flex-col">
       {/* Logo Area */}
       <div className="flex items-center gap-3 px-6 h-20 border-b border-white/10">
-        <div className="flex items-center justify-center w-10 h-10 rounded-xl gradient-primary">
-          <Heart className="h-5 w-5 text-white" />
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl">
+          <img src="/favicon.svg" alt="Logo" className="h-7 w-7" />
         </div>
         <div>
           <h2 className="text-lg font-bold text-white">Portal Vet</h2>
