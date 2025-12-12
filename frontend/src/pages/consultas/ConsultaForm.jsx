@@ -74,7 +74,7 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm overflow-y-auto py-8">
       <div className="w-full max-w-lg scale-in mx-4">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden">
           {/* Header */}
           <div className="relative px-6 py-5 bg-gradient-to-r from-amber-500 to-orange-500">
             <div className="flex items-center justify-between">
@@ -100,11 +100,11 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
           <form onSubmit={handleSubmit} className="p-6 space-y-5">
             {/* Date and Time */}
             <div className="space-y-2">
-              <label htmlFor="data_hora" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="data_hora" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Data e Hora
               </label>
               <div className="relative">
-                <Clock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Clock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                 <input
                   id="data_hora"
                   name="data_hora"
@@ -120,11 +120,11 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
 
             {/* Cliente */}
             <div className="space-y-2">
-              <label htmlFor="cliente" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="cliente" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Cliente
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
                 <select
                   id="cliente"
                   name="cliente"
@@ -145,17 +145,17 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
 
             {/* Animal */}
             <div className="space-y-2">
-              <label htmlFor="animal_id" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="animal_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Animal
               </label>
               <div className="relative">
-                <PawPrint className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                <PawPrint className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
                 <select
                   id="animal_id"
                   name="animal_id"
                   required
                   disabled={!selectedCliente}
-                  className="input-premium pl-11 appearance-none disabled:bg-slate-100 disabled:cursor-not-allowed"
+                  className="input-premium pl-11 appearance-none disabled:bg-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed"
                   value={formData.animal_id}
                   onChange={handleChange}
                 >
@@ -168,7 +168,7 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
                 </select>
               </div>
               {!selectedCliente && (
-                <p className="text-xs text-amber-600 flex items-center gap-1">
+                <p className="text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1">
                   <span className="w-1 h-1 bg-amber-500 rounded-full" />
                   Selecione um cliente primeiro
                 </p>
@@ -177,11 +177,11 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
 
             {/* Veterinário */}
             <div className="space-y-2">
-              <label htmlFor="veterinario_id" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="veterinario_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Veterinário
               </label>
               <div className="relative">
-                <Stethoscope className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                <Stethoscope className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
                 <select
                   id="veterinario_id"
                   name="veterinario_id"
@@ -202,11 +202,11 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
 
             {/* Motivo */}
             <div className="space-y-2">
-              <label htmlFor="motivo" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="motivo" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Motivo da Consulta
               </label>
               <div className="relative">
-                <FileText className="absolute left-4 top-4 h-4 w-4 text-slate-400" />
+                <FileText className="absolute left-4 top-4 h-4 w-4 text-slate-400 dark:text-slate-500" />
                 <textarea
                   id="motivo"
                   name="motivo"
@@ -221,11 +221,11 @@ const ConsultaForm = ({ onClose, onSubmit, isLoading }) => {
             </div>
 
             {/* Actions */}
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2.5 rounded-xl font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+                className="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
               >
                 Cancelar
               </button>

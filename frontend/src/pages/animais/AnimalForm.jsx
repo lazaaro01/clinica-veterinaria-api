@@ -28,7 +28,7 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm">
       <div className="w-full max-w-lg scale-in">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden">
           {/* Header */}
           <div className="relative px-6 py-5 bg-gradient-to-r from-emerald-500 to-teal-500">
             <div className="flex items-center justify-between">
@@ -54,11 +54,11 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
           <form onSubmit={handleSubmit} className="p-6 space-y-5">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label htmlFor="nome" className="block text-sm font-semibold text-slate-700">
+                <label htmlFor="nome" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Nome do animal
                 </label>
                 <div className="relative">
-                  <Dog className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Dog className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                   <input
                     id="nome"
                     name="nome"
@@ -73,7 +73,7 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="especie" className="block text-sm font-semibold text-slate-700">
+                <label htmlFor="especie" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Espécie
                 </label>
                 <select
@@ -97,11 +97,11 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label htmlFor="raca" className="block text-sm font-semibold text-slate-700">
+                <label htmlFor="raca" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Raça
                 </label>
                 <div className="relative">
-                  <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                   <input
                     id="raca"
                     name="raca"
@@ -116,11 +116,11 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="idade" className="block text-sm font-semibold text-slate-700">
+                <label htmlFor="idade" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Idade (anos)
                 </label>
                 <div className="relative">
-                  <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                   <input
                     id="idade"
                     name="idade"
@@ -137,11 +137,11 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="clienteId" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="clienteId" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Proprietário
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
                 <select
                   id="clienteId"
                   name="clienteId"
@@ -161,11 +161,11 @@ const AnimalForm = ({ onClose, onSubmit, isLoading, clientes }) => {
             </div>
 
             {/* Actions */}
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2.5 rounded-xl font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+                className="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
               >
                 Cancelar
               </button>

@@ -36,7 +36,7 @@ const VeterinarioForm = ({ onClose, onSubmit, isLoading }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm">
       <div className="w-full max-w-lg scale-in">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden">
           {/* Header */}
           <div className="relative px-6 py-5 bg-gradient-to-r from-purple-500 to-indigo-600">
             <div className="flex items-center justify-between">
@@ -61,11 +61,11 @@ const VeterinarioForm = ({ onClose, onSubmit, isLoading }) => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="p-6 space-y-5">
             <div className="space-y-2">
-              <label htmlFor="nome" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="nome" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Nome completo
               </label>
               <div className="relative">
-                <Stethoscope className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Stethoscope className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                 <input
                   id="nome"
                   name="nome"
@@ -81,11 +81,11 @@ const VeterinarioForm = ({ onClose, onSubmit, isLoading }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label htmlFor="crmv" className="block text-sm font-semibold text-slate-700">
+                <label htmlFor="crmv" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   CRMV
                 </label>
                 <div className="relative">
-                  <Award className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Award className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                   <input
                     id="crmv"
                     name="crmv"
@@ -100,11 +100,11 @@ const VeterinarioForm = ({ onClose, onSubmit, isLoading }) => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="telefone" className="block text-sm font-semibold text-slate-700">
+                <label htmlFor="telefone" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Telefone
                 </label>
                 <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                   <input
                     id="telefone"
                     name="telefone"
@@ -120,11 +120,11 @@ const VeterinarioForm = ({ onClose, onSubmit, isLoading }) => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="especialidade" className="block text-sm font-semibold text-slate-700">
+              <label htmlFor="especialidade" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Especialidade
               </label>
               <div className="relative">
-                <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
                 <select
                   id="especialidade"
                   name="especialidade"
@@ -144,11 +144,11 @@ const VeterinarioForm = ({ onClose, onSubmit, isLoading }) => {
             </div>
 
             {/* Actions */}
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2.5 rounded-xl font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+                className="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
               >
                 Cancelar
               </button>

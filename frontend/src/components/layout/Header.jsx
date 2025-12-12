@@ -1,23 +1,32 @@
 import { useState } from 'react'
-import { Bell, Search, Sun, Moon } from 'lucide-react'
+import { Bell, Search, Sun, Moon, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/contexts/ThemeContext'
 
-const Header = () => {
+const Header = ({ onToggleSidebar }) => {
   const [notifications] = useState([])
   const { isDark, toggleTheme } = useTheme()
 
   return (
     <header className="sticky top-0 z-10 h-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-700/50 transition-colors duration-300">
-      <div className="flex items-center justify-between h-full px-8">
-        {/* Search Bar */}
-        <div className="relative w-96">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
-          <input
-            type="text"
-            placeholder="Pesquisar clientes, animais, consultas..."
-            className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 border-0 text-sm text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-white dark:focus:bg-slate-700 transition-all duration-300"
-          />
+      <div className="flex items-center justify-between h-full px-4 md:px-8">
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden"
+            onClick={onToggleSidebar}
+          >
+            <Menu className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+          </Button>
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
+            <input
+              type="text"
+              placeholder="Pesquisar clientes, animais, consultas..."
+              className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 border-0 text-sm text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-white dark:focus:bg-slate-700 transition-all duration-300"
+            />
+          </div>
         </div>
 
         {/* Right Side Actions */}

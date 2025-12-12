@@ -35,6 +35,12 @@ export const ThemeProvider = ({ children }) => {
             root.classList.remove('dark')
         }
 
+        // Update favicon based on theme
+        const favicon = document.querySelector("link[rel='icon']")
+        if (favicon) {
+            favicon.href = theme === 'dark' ? '/favicon-dark.ico' : '/favicon.ico'
+        }
+
         // Save preference
         localStorage.setItem('theme', theme)
     }, [theme])
